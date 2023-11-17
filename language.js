@@ -1,19 +1,19 @@
-var langLib = {
+let langLib = {
     "en": {
-        "title": "Google Forms Auto Filler",
+        "title": "Google Forms ShotGun",
         "label": "Label",
         "value": "Value",
         "saved": "Saved",
         "add": "Add",
         "save": "Save"
     },
-    "tr": {
-        "title": "Google Forms Doldurucu",
-        "label": "Başlık",
-        "value": "Cevap",
-        "saved": "Kaydedildi",
-        "add": "Ekle",
-        "save": "Kaydet"
+    "fr": {
+        "title": "Google Forms ShotGun",
+        "label": "Label",
+        "value": "Valeur",
+        "saved": "Enregistré",
+        "add": "Ajouter",
+        "save": "Sauvegarder"
     }
 }
 
@@ -25,7 +25,7 @@ var langLib = {
 */
 function setLanguageOnWindowLoad(){
     chrome.storage.sync.get("language", function(result) {
-        var lang = "en"; // default language is English
+        let lang = "en"; // default language is English
 
         // set language if set before
         if (!objectIsEmpty(result["language"])) {
@@ -44,7 +44,7 @@ function setLanguageOnWindowLoad(){
 */
 function setLanguageByButton(langEvent) {
     chrome.storage.sync.get("language", function(result) {
-        var lang = langEvent.srcElement.value;
+        let lang = langEvent.srcElement.value;
 
         setLanguage(lang);        
     });
@@ -58,7 +58,7 @@ function setLanguageByButton(langEvent) {
 */
 function setLanguage(lang){
     // Get elements to be translated
-    var textElements = document.querySelectorAll("[data-lang]");
+    let textElements = document.querySelectorAll("[data-lang]");
 
     // Update current language information
     chrome.storage.sync.set({ "language": lang }, function() {
@@ -66,8 +66,8 @@ function setLanguage(lang){
     });
     
     // Update texts on screen
-    for (var i = 0; i < textElements.length; i++) {
-        var dataName = textElements[i].getAttribute("data-lang");
+    for (let i = 0; i < textElements.length; i++) {
+        let dataName = textElements[i].getAttribute("data-lang");
         textElements[i].textContent = langLib[lang][dataName];
     }
 }
